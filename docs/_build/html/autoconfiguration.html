@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Auto-configuration of evolutionary algorithms: NSGA-II &#8212; jmetal 6.0-SNAPSHOT documentation</title>
+    <title>Auto-configuration of evolutionary algorithms: NSGA-II &#8212; jmetalTutorials 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Installation" href="installation.html" />
+    <link rel="prev" title="Installation quick guide" href="installation.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -136,29 +136,29 @@ step can be considered as a variant of NSGA-II.</p>
 <p>The <em>autoNSGAII</em> has a <em>variation</em> component than can take a single value named <em>crossoverAndMutationVariation</em>. It is intended to represent the typical crossover and mutation operators of a genetic algorithm (additional values, e.g., <em>DifferentialiEvolutionVariation</em> are expected to be added in the future). The <em>crossover</em> operators included are <em>SBX</em> (simulated binary crossover) and <em>BLX_Alpha</em>, which are featured by a given probability and a <em>crossoverRepairStrategy</em>, which defines what to do when the crossover produces a variable value out of the allowed bounds (please, refer to Section 3.2 and Figure 3 in the paper). The <em>SBX</em> and <em>BLX_Alpha</em> require, if selected, a distribution index (a value in the range [5.0, 400]) and an alpha value (in the range [0.0, 1.0]), respectively. Similarly, there are two possible mutation operators to choose from, <em>polynomial</em> and <em>uniform</em>, requiring both a mutation probability and a repairing strategy; the polynomial mutation has, as the SBX crossover, a distribution index parameter (in the range [5.0, 400]) and the <em>uniform</em> mutation needs a perturbation value (in the range [0.0, 1.0]).</p>
 <p>Finally, the <em>selection</em> operator be <em>random</em> or <em>tournament</em>; this last one can take a value between 2 (i.e., binary tournament) and 10.</p>
 <p>As we intend to use irace as auto-tuning package, it requires a text file containing information about the parameters, the values they can take, an their relationships. We have created then a file called <code class="docutils literal notranslate"><span class="pre">parameters-NSGAII.txt</span></code> containing the required data:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>algorithmResult                          &quot;--algorithmResult &quot;                     c       (externalArchive,population)
-populationSize                           &quot;--populationSize &quot;                      o       (100)
-populationSizeWithArchive                &quot;--populationSizeWithArchive &quot;           o       (10,20,50,100,200)         | algorithmResult %in% c(&quot;externalArchive&quot;)
-#
-maximumNumberOfEvaluations               &quot;--maximumNumberOfEvaluations &quot;          c       (25000)
-createInitialSolutions                   &quot;--createInitialSolutions &quot;              c       (random,latinHypercubeSampling,scatterSearch)
-#
-variation                                &quot;--variation &quot;                           c       (crossoverAndMutationVariation)
-offspringPopulationSize                  &quot;--offspringPopulationSize &quot;             o       (1,10,50,100)
-crossover                                &quot;--crossover &quot;                           c       (SBX,BLX_ALPHA)
-crossoverProbability                     &quot;--crossoverProbability &quot;                r       (0.0, 1.0)                     | crossover %in% c(&quot;SBX&quot;,&quot;BLX_ALPHA&quot;)
-crossoverRepairStrategy                  &quot;--crossoverRepairStrategy &quot;             c       (random, round, bounds)        | crossover %in% c(&quot;SBX&quot;,&quot;BLX_ALPHA&quot;)
-sbxDistributionIndex                     &quot;--sbxDistributionIndex &quot;                r       (5.0, 400.0)                   | crossover %in% c(&quot;SBX&quot;)
-blxAlphaCrossoverAlphaValue              &quot;--blxAlphaCrossoverAlphaValue &quot;         r       (0.0, 1.0)                     | crossover %in% c(&quot;BLX_ALPHA&quot;)
-mutation                                 &quot;--mutation &quot;                            c       (uniform, polynomial)
-mutationProbability                      &quot;--mutationProbability &quot;                 r       (0.0, 1.0)                     | mutation %in% c(&quot;uniform&quot;,&quot;polynomial&quot;)
-mutationRepairStrategy                   &quot;--mutationRepairStrategy &quot;              c       (random, round, bounds)        | mutation %in% c(&quot;uniform&quot;,&quot;polynomial&quot;)
-polynomialMutationDistributionIndex      &quot;--polynomialMutationDistributionIndex &quot; r       (5.0, 400.0)                   | mutation %in% c(&quot;polynomial&quot;)
-uniformMutationPerturbation              &quot;--uniformMutationPerturbation &quot;         r       (0.0, 1.0)                     | mutation %in% c(&quot;uniform&quot;)
-#
-selection                                &quot;--selection &quot;                           c       (tournament, random)
-selectionTournamentSize                  &quot;--selectionTournamentSize &quot;             i       (2, 10)                        | selection %in% c(&quot;tournament&quot;)
-#
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">algorithmResult</span>                          <span class="s2">&quot;--algorithmResult &quot;</span>                     <span class="n">c</span>       <span class="p">(</span><span class="n">externalArchive</span><span class="p">,</span><span class="n">population</span><span class="p">)</span>
+<span class="n">populationSize</span>                           <span class="s2">&quot;--populationSize &quot;</span>                      <span class="n">o</span>       <span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">populationSizeWithArchive</span>                <span class="s2">&quot;--populationSizeWithArchive &quot;</span>           <span class="n">o</span>       <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>         <span class="o">|</span> <span class="n">algorithmResult</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;externalArchive&quot;</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="n">maximumNumberOfEvaluations</span>               <span class="s2">&quot;--maximumNumberOfEvaluations &quot;</span>          <span class="n">c</span>       <span class="p">(</span><span class="mi">25000</span><span class="p">)</span>
+<span class="n">createInitialSolutions</span>                   <span class="s2">&quot;--createInitialSolutions &quot;</span>              <span class="n">c</span>       <span class="p">(</span><span class="n">random</span><span class="p">,</span><span class="n">latinHypercubeSampling</span><span class="p">,</span><span class="n">scatterSearch</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="n">variation</span>                                <span class="s2">&quot;--variation &quot;</span>                           <span class="n">c</span>       <span class="p">(</span><span class="n">crossoverAndMutationVariation</span><span class="p">)</span>
+<span class="n">offspringPopulationSize</span>                  <span class="s2">&quot;--offspringPopulationSize &quot;</span>             <span class="n">o</span>       <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">crossover</span>                                <span class="s2">&quot;--crossover &quot;</span>                           <span class="n">c</span>       <span class="p">(</span><span class="n">SBX</span><span class="p">,</span><span class="n">BLX_ALPHA</span><span class="p">)</span>
+<span class="n">crossoverProbability</span>                     <span class="s2">&quot;--crossoverProbability &quot;</span>                <span class="n">r</span>       <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>                     <span class="o">|</span> <span class="n">crossover</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;SBX&quot;</span><span class="p">,</span><span class="s2">&quot;BLX_ALPHA&quot;</span><span class="p">)</span>
+<span class="n">crossoverRepairStrategy</span>                  <span class="s2">&quot;--crossoverRepairStrategy &quot;</span>             <span class="n">c</span>       <span class="p">(</span><span class="n">random</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span>        <span class="o">|</span> <span class="n">crossover</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;SBX&quot;</span><span class="p">,</span><span class="s2">&quot;BLX_ALPHA&quot;</span><span class="p">)</span>
+<span class="n">sbxDistributionIndex</span>                     <span class="s2">&quot;--sbxDistributionIndex &quot;</span>                <span class="n">r</span>       <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">400.0</span><span class="p">)</span>                   <span class="o">|</span> <span class="n">crossover</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;SBX&quot;</span><span class="p">)</span>
+<span class="n">blxAlphaCrossoverAlphaValue</span>              <span class="s2">&quot;--blxAlphaCrossoverAlphaValue &quot;</span>         <span class="n">r</span>       <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>                     <span class="o">|</span> <span class="n">crossover</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;BLX_ALPHA&quot;</span><span class="p">)</span>
+<span class="n">mutation</span>                                 <span class="s2">&quot;--mutation &quot;</span>                            <span class="n">c</span>       <span class="p">(</span><span class="n">uniform</span><span class="p">,</span> <span class="n">polynomial</span><span class="p">)</span>
+<span class="n">mutationProbability</span>                      <span class="s2">&quot;--mutationProbability &quot;</span>                 <span class="n">r</span>       <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>                     <span class="o">|</span> <span class="n">mutation</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span><span class="s2">&quot;polynomial&quot;</span><span class="p">)</span>
+<span class="n">mutationRepairStrategy</span>                   <span class="s2">&quot;--mutationRepairStrategy &quot;</span>              <span class="n">c</span>       <span class="p">(</span><span class="n">random</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span>        <span class="o">|</span> <span class="n">mutation</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span><span class="s2">&quot;polynomial&quot;</span><span class="p">)</span>
+<span class="n">polynomialMutationDistributionIndex</span>      <span class="s2">&quot;--polynomialMutationDistributionIndex &quot;</span> <span class="n">r</span>       <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">400.0</span><span class="p">)</span>                   <span class="o">|</span> <span class="n">mutation</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;polynomial&quot;</span><span class="p">)</span>
+<span class="n">uniformMutationPerturbation</span>              <span class="s2">&quot;--uniformMutationPerturbation &quot;</span>         <span class="n">r</span>       <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>                     <span class="o">|</span> <span class="n">mutation</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;uniform&quot;</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="n">selection</span>                                <span class="s2">&quot;--selection &quot;</span>                           <span class="n">c</span>       <span class="p">(</span><span class="n">tournament</span><span class="p">,</span> <span class="n">random</span><span class="p">)</span>
+<span class="n">selectionTournamentSize</span>                  <span class="s2">&quot;--selectionTournamentSize &quot;</span>             <span class="n">i</span>       <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>                        <span class="o">|</span> <span class="n">selection</span> <span class="o">%</span><span class="ow">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;tournament&quot;</span><span class="p">)</span>
+<span class="c1">#</span>
 </pre></div>
 </div>
 <p>To know about the syntax of irace configuration files, please refer to the irace documentation.</p>
@@ -225,7 +225,7 @@ selectionTournamentSize                  &quot;--selectionTournamentSize &quot; 
 <h2>The <code class="docutils literal notranslate"><span class="pre">AutoNSGAII</span></code> class<a class="headerlink" href="#the-autonsgaii-class" title="Permalink to this headline">¶</a></h2>
 <p>An example of configuring and running NSGA-II with these <code class="docutils literal notranslate"><span class="pre">EvolutionaryAlgorithm</span></code> class is provided in <code class="docutils literal notranslate"><span class="pre">org.uma.jmetal.auto.algorithm.nsgaii.NSGAII</span></code>, where that class is instantiated with the components leading to an standard NSGA-II. However, our purpose is to have the ability of automatically configure NSGA-II, so we need something more flexible.</p>
 <p>The approach we have adopted is to get a sequence of pairs &lt;parameter, value&gt; as input, which is parsed to properly get a version of NSGA-II. This task is performed by class <code class="docutils literal notranslate"><span class="pre">org.uma.jmetal.auto.algorithm.nsgaii.AutoNSGAII</span></code>. This way, to get an NSGA-II algorithm with standard settings the following string must be passed to class <code class="docutils literal notranslate"><span class="pre">AutoNSGAII</span></code> from the command line:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>--problemName org.uma.jmetal.problem.multiobjective.zdt.ZDT1 &quot;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--problemName org.uma.jmetal.problem.multiobjective.zdt.ZDT1 &quot;
 + &quot;--referenceFrontFileName ZDT1.pf &quot;
 + &quot;--maximumNumberOfEvaluations 25000 &quot;
 + &quot;--algorithmResult population &quot;
@@ -286,7 +286,7 @@ selectionTournamentSize                  &quot;--selectionTournamentSize &quot; 
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">jmetal</a></h1>
+<h1 class="logo"><a href="index.html">jmetalTutorials</a></h1>
 
 
 
@@ -296,9 +296,9 @@ selectionTournamentSize                  &quot;--selectionTournamentSize &quot; 
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">CONTENTS:</span></p>
+<p class="caption"><span class="caption-text">TUTORIALS:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation quick guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Auto-configuration of evolutionary algorithms: NSGA-II</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nsga-ii-parameters">NSGA-II parameters</a></li>
@@ -313,7 +313,7 @@ selectionTournamentSize                  &quot;--selectionTournamentSize &quot; 
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
+      <li>Previous: <a href="installation.html" title="previous chapter">Installation quick guide</a></li>
   </ul></li>
 </ul>
 </div>

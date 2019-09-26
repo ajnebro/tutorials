@@ -8,12 +8,10 @@ jMetal is a Java-based framework for multi-objective optimization with metaheuri
 
 This Web site contains tutorials about jMetal 6. Note that jMetal 6 is under develoment, so the contents of the tutorials can change.
 
-Tutorials
-=========
 
 .. toctree::
     :maxdepth: 2
-    :caption: CONTENTS:
+    :caption: TUTORIALS:
     
     installation.rst
     autoconfiguration.rst

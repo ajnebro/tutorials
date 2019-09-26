@@ -17,14 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'jmetal'
+project = 'jmetalTutorials'
 copyright = '2019, Antonio J. Nebro'
 author = 'Antonio J. Nebro'
 
-highlight_language = 'java'
-
 # The full version, including alpha/beta/rc tags
-release = '6.0-SNAPSHOT'
+release = '0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -56,6 +54,6 @@ html_theme = 'alabaster'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-show_authors = 'true'
+# show_authors = 'true'
 
 master_doc = 'index'

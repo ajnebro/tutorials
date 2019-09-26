@@ -182,7 +182,7 @@ An example of configuring and running NSGA-II with these ``EvolutionaryAlgorithm
 
 The approach we have adopted is to get a sequence of pairs <parameter, value> as input, which is parsed to properly get a version of NSGA-II. This task is performed by class ``org.uma.jmetal.auto.algorithm.nsgaii.AutoNSGAII``. This way, to get an NSGA-II algorithm with standard settings the following string must be passed to class ``AutoNSGAII`` from the command line: 
 
-.. code-block:: java
+.. code-block:: text
 
                 --problemName org.uma.jmetal.problem.multiobjective.zdt.ZDT1 "
                 + "--referenceFrontFileName ZDT1.pf "

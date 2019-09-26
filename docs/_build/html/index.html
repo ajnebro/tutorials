@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>jMetal 6 project documentation Web site &#8212; jmetal 6.0-SNAPSHOT documentation</title>
+    <title>jMetal Tutorials &#8212; jmetalTutorials 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="next" title="Installation quick guide" href="installation.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,62 +33,14 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="jmetal-6-project-documentation-web-site">
-<h1>jMetal 6 project documentation Web site<a class="headerlink" href="#jmetal-6-project-documentation-web-site" title="Permalink to this headline">¶</a></h1>
-<p><em>Section author: Antonio J. Nebro &lt;<a class="reference external" href="mailto:ajnebro&#37;&#52;&#48;uma&#46;es">ajnebro<span>&#64;</span>uma<span>&#46;</span>es</a>&gt;</em></p>
+  <div class="section" id="jmetal-tutorials">
+<h1>jMetal Tutorials<a class="headerlink" href="#jmetal-tutorials" title="Permalink to this headline">¶</a></h1>
 <p>jMetal is a Java-based framework for multi-objective optimization with metaheuristics. It is an open-source project released under MIT license, and it is hosted in GitHub: <a class="reference external" href="https://github.com/jMetal/jMetal">https://github.com/jMetal/jMetal</a>. The current version is jMetal 5.8. The next major release of jMetal will be version 6.0, which is being developed in the <code class="docutils literal notranslate"><span class="pre">jmetal6</span></code> branch of the repository as version 6.0-SNAPSHOT.</p>
-<p>This Web site is devoted to describing the new features of jMetal 6.0. Please, note that <strong>this is an active development branch</strong>, where some ideas are still not completely defined and many changes will take place until the version is closed. In its current state, this branch is not intended to newcomers but to users already familiarized with jMetal. It is worth mentioning that we have taken as starting point all the code included in jMetal 5.8, so this branch is fully functional and in fact we are currently using it in our research work. Comments and suggestions
-are welcome; we encourage interested users in contributing to open new issues in the project repository.</p>
-<p>A summary of the incoming features of jMetal 6.0 are listed next:</p>
-<ul class="simple">
-<li>Use of Sphinx for the documentation. In jMetal 5 the documentation is based on Markdown files; it not complete and some parts are outdated.</li>
-<li>Support for automatic configuration of metaheuristics. We include a sub-project called <code class="docutils literal notranslate"><span class="pre">jmetal-auto</span></code>, which currently contains a version of NSGA-II that can be fully auto tuned using <code class="docutils literal notranslate"><span class="pre">irace</span></code>, as is described in the paper “Automatic Configuration of NSGA-II with jMetal and irace”, presented at GECCO 2019 (DOI: <a class="reference external" href="https://doi.org/10.1145/3319619.3326832">https://doi.org/10.1145/3319619.3326832</a>).</li>
-<li>Improved experimentation. The output of an experiment (i.e., the execution of a number of algorithms on a set of problems) is an CSV file which can be further analyzed to produce Latex tables and graphics with statistical information. We plan to use Tablesaw (<a class="reference external" href="https://github.com/jtablesaw/tablesaw">https://github.com/jtablesaw/tablesaw</a>) and Smile (<a class="reference external" href="http://haifengl.github.io/smile/">http://haifengl.github.io/smile/</a>) for the analysis tasks. All the experimentation code is located in sub-package <code class="docutils literal notranslate"><span class="pre">jmetal-lab</span></code>.</li>
-<li>All the core packages in <code class="docutils literal notranslate"><span class="pre">jmetal-core</span></code> (<code class="docutils literal notranslate"><span class="pre">solution</span></code>, <code class="docutils literal notranslate"><span class="pre">problem</span></code>, <code class="docutils literal notranslate"><span class="pre">algorithm</span></code>, <code class="docutils literal notranslate"><span class="pre">operator</span></code>, <code class="docutils literal notranslate"><span class="pre">quality</span> <span class="pre">indicator</span></code>), are being reviewed, tested, and refactored. Some relevant changes already addressed are:<ul>
-<li>All the classes related to solutions encodings depended on a problem (i.e., a sub-class of class <code class="docutils literal notranslate"><span class="pre">Problem</span></code>). This dependence has been removed, so a solution can be created without the need of a problem to do that.</li>
-</ul>
-</li>
-<li>The implementation of most of the algorithms in <code class="docutils literal notranslate"><span class="pre">jmetal-algorithm</span></code> will be revised. A major issue here is that the current base classes for evolutionary algorithms were designed to be extended by using inheritance, while for the autoconfiguration of algorithms we have designed a new template based on delegation, which is more flexible and allows to fully configure an algorithm with a string of arguments. As for now, the only algorithm we are woking with is NSGA-II, so we have now different versions of it (the original one in sub-project <code class="docutils literal notranslate"><span class="pre">jmetal-algorithm</span></code> and two new versions in sub-project <code class="docutils literal notranslate"><span class="pre">jmetal-auto</span></code>), what can be confusing.</li>
-</ul>
-<p>jMetal 6 is implemented in Java 8 and it is a Maven project structured in six sub-projects:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="34%" />
-<col width="66%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Sub-project</th>
-<th class="head">Contents</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>jmetal-core</td>
-<td>Core classes</td>
-</tr>
-<tr class="row-odd"><td>jmetal-solution</td>
-<td>Solution encodings</td>
-</tr>
-<tr class="row-even"><td>jmetal-algorithm</td>
-<td>Algorithm implementations</td>
-</tr>
-<tr class="row-odd"><td>jmetal-problem</td>
-<td>Bencharmk problems</td>
-</tr>
-<tr class="row-even"><td>jmetal-exec</td>
-<td>Examples</td>
-</tr>
-<tr class="row-odd"><td>jmetal-lab</td>
-<td>Experimentation</td>
-</tr>
-<tr class="row-even"><td>jmetal-auto</td>
-<td>Auto configuration</td>
-</tr>
-</tbody>
-</table>
+<p>This Web site contains tutorials about jMetal 6. Note that jMetal 6 is under develoment, so the contents of the tutorials can change.</p>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">CONTENTS:</span></p>
+<p class="caption"><span class="caption-text">TUTORIALS:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation quick guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="autoconfiguration.html">Auto-configuration of evolutionary algorithms: NSGA-II</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="autoconfiguration.html#motivation">Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoconfiguration.html#nsga-ii-parameters">NSGA-II parameters</a></li>
@@ -116,7 +68,7 @@ are welcome; we encourage interested users in contributing to open new issues in
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">jmetal</a></h1>
+<h1 class="logo"><a href="#">jmetalTutorials</a></h1>
 
 
 
@@ -126,9 +78,9 @@ are welcome; we encourage interested users in contributing to open new issues in
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">CONTENTS:</span></p>
+<p class="caption"><span class="caption-text">TUTORIALS:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation quick guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="autoconfiguration.html">Auto-configuration of evolutionary algorithms: NSGA-II</a></li>
 </ul>
 
@@ -136,7 +88,7 @@ are welcome; we encourage interested users in contributing to open new issues in
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="installation.html" title="next chapter">Installation</a></li>
+      <li>Next: <a href="installation.html" title="next chapter">Installation quick guide</a></li>
   </ul></li>
 </ul>
 </div>
