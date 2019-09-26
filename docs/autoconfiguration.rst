@@ -1,7 +1,7 @@
 Auto-configuration of evolutionary algorithms: NSGA-II
 ======================================================
 
-Before reading this section, readers are referred to the paper "Automatic configuration of NSGA-II with jMetal and irace", presented in GECCO 2019 (DOI: https://doi.org/10.1145/3319619.3326832)
+Before reading this section, readers are referred to the paper "Automatic configuration of NSGA-II with jMetal and irace", presented in GECCO 2019 (DOI: https://doi.org/10.1145/3319619.3326832). This tutorial is intended as a guide to replicate the experimentation conducted in that paper. 
 
 Motivation
 ----------
@@ -207,12 +207,23 @@ The approach we have adopted is to get a sequence of pairs <parameter, value> as
 
 We include a class named ``org.uma.jmetal.auto.algorithm.nsgaii.NSGAWithParameters" showing how to use this parameter string with ``AutoNSGAII``.
 
-Auto-configuring NSGA-II with irace
------------------------------------
+Stuff required
+--------------
 
-To replicate the results presented in https://doi.org/10.1145/3319619.3326832 all the needed resources are include in the folder ``jmetal-auto/src/main/resources/irace``. Just copy the contents of that folder to the machine where you are going to run the experiments. Take into account that irace will generate thousands of configurations, so using a multi-core machine is advisable (we use a Linux virtual machine with 24 cores). We have tested the software in both Linux and macOS. A requirement of irace is to have R installed.
+To replicate the results presented in https://doi.org/10.1145/3319619.3326832 we need:
+* R 
+* The jar file `jmetal-auto-6.0-SNAPSHOT-jar-with-dependencies.jar`.
+* The contents of folder ``jmetal-auto/src/main/resources/irace``. 
 
-The contents of irace folder is the following:
+To generate the `jmetal-auto-6.0-SNAPSHOT-jar-with-dependencies.jar` file, just type the following command at the root of the jMetal project:
+
+.. code-block:: bash
+
+  mvn clean package -DskipTests=tournament
+
+If everything goes fine, the file will be generated in the `jmetal-auto/target` folder.
+
+The contents of irace folder are the following:
 
 1. ``irace.tar.gz``: file containing irace
 2. ``parameters-NSGAII.txt``: file describing the parameters that can be tuned, including their allowed values and their dependences. You are free to modify some parameter values if you know their meaning.
@@ -220,30 +231,39 @@ The contents of irace folder is the following:
 
 .. code-block:: text
 
-org.uma.jmetal.problem.multiobjective.wfg.WFG1 --referenceFrontFileName WFG1.2D.pf
-org.uma.jmetal.problem.multiobjective.wfg.WFG2 --referenceFrontFileName WFG2.2D.pf
-org.uma.jmetal.problem.multiobjective.wfg.WFG3 --referenceFrontFileName WFG3.2D.pf
-org.uma.jmetal.problem.multiobjective.wfg.WFG4 --referenceFrontFileName WFG4.2D.pf
-org.uma.jmetal.problem.multiobjective.wfg.WFG5 --referenceFrontFileName WFG5.2D.pf
-org.uma.jmetal.problem.multiobjective.wfg.WFG6 --referenceFrontFileName WFG6.2D.pf
-org.uma.jmetal.problem.multiobjective.wfg.WFG7 --referenceFrontFileName WFG7.2D.pf
-org.uma.jmetal.problem.multiobjective.wfg.WFG8 --referenceFrontFileName WFG8.2D.pf
-org.uma.jmetal.problem.multiobjective.wfg.WFG9 --referenceFrontFileName WFG9.2D.pf
+  org.uma.jmetal.problem.multiobjective.wfg.WFG1 --referenceFrontFileName WFG1.2D.pf
+  org.uma.jmetal.problem.multiobjective.wfg.WFG2 --referenceFrontFileName WFG2.2D.pf
+  org.uma.jmetal.problem.multiobjective.wfg.WFG3 --referenceFrontFileName WFG3.2D.pf
+  org.uma.jmetal.problem.multiobjective.wfg.WFG4 --referenceFrontFileName WFG4.2D.pf
+  org.uma.jmetal.problem.multiobjective.wfg.WFG5 --referenceFrontFileName WFG5.2D.pf
+  org.uma.jmetal.problem.multiobjective.wfg.WFG6 --referenceFrontFileName WFG6.2D.pf
+  org.uma.jmetal.problem.multiobjective.wfg.WFG7 --referenceFrontFileName WFG7.2D.pf
+  org.uma.jmetal.problem.multiobjective.wfg.WFG8 --referenceFrontFileName WFG8.2D.pf
+  org.uma.jmetal.problem.multiobjective.wfg.WFG9 --referenceFrontFileName WFG9.2D.pf
 
 We must note that **currently we can only auto-configure NSGA-II with benchmark problems** included in jMetal.
 
 4. ``scenario-NSGAII.txt``: default irace parameters (we usually keep this file unchanged)
-5. ``target-runner``. Bash script which is executed in every run of irace. It contains as ``FIXED_PARAMS`` the path of the ``jmetal-auto-6.0-SNAPSHOT-jar-with-dependencies.jar`` which is included in the resources directory (this file can be generated with Maven just running ``mvn package`` from the project root directory).
+5. ``target-runner``. Bash script which is executed in every run of irace. 
 6. ``run.sh``. Bash script to run irace. VERY IMPORTANT: the number of cores to be used by irace are indicated in the ``IRACE_PARAMS`` variable (the default value is 24).
+
+Running everything
+------------------
+
+Once you have all the needed resources, just create a folder in the machine where you are going to run the experiment and copy  the contents of the `irace` folder and the `jmetal-auto-6.0-SNAPSHOT-jar-with-dependencies.jar` file into it. Take into account that irace will generate thousands of configurations, so using a multi-core machine is advisable (we use a Linux virtual machine with 24 cores). We have tested the software in Linux, macOS, and Windows 10 (in the Ubuntu Bash console).
 
 To run irace simply run the following command:
 
 .. code-block:: bash
 
-  ./run.sh NSGAII 
+  ./run.sh NSGAII 3
 
+The last parameter is used as a seed.
 
-Then irace will create a directory called ``execdir`` where it will write a number of output files. Two of those files are of particular interest: ``irace.stderr.out``, which should be empty if everything is ok, and ``irace.sdtout.err``, which contains the configurations being tested and, when irace stops, the best configurations founds. These configurations can be used with the ``NSGAWithParameters`` program.
+Results
+-------
+
+irace will create a directory called ``execdir`` where it will write a number of output files. Two of those files are of particular interest: ``irace.stderr.out``, which should be empty if everything is ok, and ``irace.sdtout.err``, which contains the configurations being tested and, when irace stops, the best configurations founds. These configurations can be used with the ``NSGAWithParameters`` program.
 
 
 
