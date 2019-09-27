@@ -1,5 +1,7 @@
-Installation quick guide
-========================
+.. _installation:
+
+jMetal 6.0-SNAPSHOT Installation quick guide
+============================================
 jMetal is a Maven project hosted in GitHub, so there are two ways of getting the software: adding it as a dependence in your own Maven project, or getting the source code from https://github.com/jMetal/jMetal.
 
 The software requirements to use jMetal 6 are:
