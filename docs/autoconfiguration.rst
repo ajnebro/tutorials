@@ -1,7 +1,7 @@
 Auto-configuration of evolutionary algorithms: NSGA-II
 ======================================================
 
-Before reading this section, readers are referred to the paper "Automatic configuration of NSGA-II with jMetal and irace", presented in GECCO 2019 (DOI: https://doi.org/10.1145/3319619.3326832), and to the installation guide of jMetal 6.0-SNAPSHOT :ref:`installation`. This tutorial is intended as a guide to replicate the experimentation conducted in that paper. 
+Before reading this section, readers are referred to the paper "Automatic configuration of NSGA-II with jMetal and irace", presented in GECCO 2019 (DOI: https://doi.org/10.1145/3319619.3326832), and to the :ref:`installation`. This tutorial is intended as a guide to replicate the experimentation conducted in that paper. 
 
 Motivation
 ----------
@@ -211,6 +211,7 @@ Stuff required
 --------------
 
 To replicate the results presented in https://doi.org/10.1145/3319619.3326832 we need:
+
 * R 
 * The jar file `jmetal-auto-6.0-SNAPSHOT-jar-with-dependencies.jar`.
 * The contents of folder ``jmetal-auto/src/main/resources/irace``. 
