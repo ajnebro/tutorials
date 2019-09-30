@@ -279,6 +279,18 @@ The second file contains a lot of information about the run of irace, including 
 
 This configuration can be used with the ``NSGAWithParameters`` program to run NSGA-II with those settings.
 
+Some examples of Pareto front approximations produced with NSGA-II with standard settings and with the tuned configuration are included next:
+
+.. figure:: ./resources/figures/NSGAII_STD_ZDT1.png
+.. figure:: ./resources/figures/NSGAII_Tun_ZDT1.png
+.. figure:: ./resources/figures/NSGAII_STD_DTLZ4.png
+.. figure:: ./resources/figures/NSGAII_Tun_DTLZ4.png
+.. figure:: ./resources/figures/NSGAII_STD_WFG3.png
+.. figure:: ./resources/figures/NSGAII_Tun_WFG3.png
+
+
+
+
 
 .. 
   +------------+------------+-----------+
