@@ -1,7 +1,7 @@
 Auto-configuration of evolutionary algorithms: NSGA-II
 ======================================================
 
-Before reading this section, readers are referred to the paper "Automatic configuration of NSGA-II with jMetal and irace", presented in GECCO 2019 (DOI: https://doi.org/10.1145/3319619.3326832), and to the :ref:`installation`. This tutorial is intended as a guide to replicate the experimentation conducted in that paper. 
+Before reading this section, readers are referred to the paper "Automatic configuration of NSGA-II with jMetal and irace", presented in GECCO 2019 (DOI: https://doi.org/10.1145/3319619.3326832), and to the :ref:`installation`. This tutorial is intended as a guide to replicate the experimentation conducted in that paper. Please, take into account that this is a work in progress. Comments, suggestions, and bugs reporting are welcome.
 
 Motivation
 ----------
@@ -264,8 +264,20 @@ The last parameter is used as a seed.
 Results
 -------
 
-irace will create a directory called ``execdir`` where it will write a number of output files. Two of those files are of particular interest: ``irace.stderr.out``, which should be empty if everything is ok, and ``irace.sdtout.err``, which contains the configurations being tested and, when irace stops, the best configurations founds. These configurations can be used with the ``NSGAWithParameters`` program.
+irace will create a directory called ``execdir`` where it will write a number of output files. Two of those files are of particular interest: ``irace.stderr.out`` and ``irace.sdtout.out``. The first file should be empty, i.e., we should get an empty line are executing this command:
 
+.. code-block:: bash
+
+  cat execdir/irace.stdout.out
+
+The second file contains a lot of information about the run of irace, including the configurations being tested. We are particularly interested in the best found configurations, which are written at the end of the file (just below the line starting by "# Best configuration as command lines"). For example, a result is the following:
+
+.. code-block:: text
+
+  # Best configurations as commandlines (first number is the configuration ID; same order as above):
+  4646  --algorithmResult externalArchive --populationSize 100 --populationSizeWithArchive 20 --maximumNumberOfEvaluations 25000 --createInitialSolutions random --variation crossoverAndMutationVariation --offspringPopulationSize 1 --crossover BLX_ALPHA --crossoverProbability 0.876 --crossoverRepairStrategy random --blxAlphaCrossoverAlphaValue 0.5729 --mutation uniform --mutationProbability 0.0439 --mutationRepairStrategy bounds --uniformMutationPerturbation 0.9957 --selection tournament --selectionTournamentSize 8
+
+This configuration can be used with the ``NSGAWithParameters`` program to run NSGA-II with those settings.
 
 
 .. 
