@@ -3,3 +3,9 @@
 docs/_build
 docs/_static
 docs/_templates
+
+.RData
+.Rhistory
+
+.DS_Store
+
