@@ -16,6 +16,7 @@ This Web site contains tutorials about jMetal 6. Note that jMetal 6 is under dev
     :caption: TUTORIALS:
     
     installation.rst
+    experimentation.rst
     autoconfiguration.rst
 
 Indices and tables
