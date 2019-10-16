@@ -12,16 +12,16 @@ This Web site contains tutorials about jMetal 6. Note that jMetal 6 is under dev
 
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :caption: TUTORIALS:
     
     installation.rst
     experimentation.rst
     autoconfiguration.rst
 
-Indices and tables
-==================
+.. Indices and tables
+..   ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`

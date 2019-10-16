@@ -132,7 +132,7 @@ We can observe the generation of a file called *HV*; it will contains the value 
 
 Another result is a CSV file called *QualityIndicatorSummary.csv*, which contains a summary of all the quality indicators results. The header (and some lines of contents) contains these fields: algorithm name, problem name, indicator name (*HV*, *EP*, etc.), execution id (from 0 to *R - 1*), and indicator value. The first lines of this file would look like this:
 
-.. code-block:: text
+.. code-block:: csv
 
  Algorithm,Problem,IndicatorName,ExecutionId,IndicatorValue
  NSGAII,ZDT1,EP,0,0.015705992620067832
